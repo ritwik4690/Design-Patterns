@@ -10,6 +10,8 @@ class Logger {
     static mutex mtx;
     static Logger* loggerInstance;
     Logger();
+    Logger(const Logger &);
+    Logger& operator=(const Logger &);
 public:
     static Logger* getInstance();
     void Log(string message);
