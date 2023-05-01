@@ -3,6 +3,7 @@
 using namespace std;
 int Logger::ctr = 0;
 Logger* Logger::loggerInstance = nullptr;
+mutex Logger:: mtx;
 
 Logger::Logger() {
     ctr++;
@@ -14,8 +15,11 @@ void Logger::Log(string message) {
 }
 
 Logger* Logger::getInstance() {
+
+    mtx.lock();
     if (loggerInstance == nullptr) {
         loggerInstance = new Logger();
     }
+    mtx.unlock();
     return loggerInstance;
 }
